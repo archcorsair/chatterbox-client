@@ -6,7 +6,7 @@ body {
 }
 
 #main, #chats {
-    width: 500px;
+    width: 60%;
     margin: auto;
     text-align: left;
     background: white;
@@ -106,4 +106,8 @@ form input[type=text] {
   height: auto;
   max-height: 500px;
   overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
 }
