@@ -27,7 +27,7 @@ app.clearMessages = function() {
   messages.empty();
 };
 
-app.renderMessage = function(message) {
+app.renderMessage = function(message, roomname = '#chats') {
   let newMessage = $(`<div class='message panel panel-default'>
       <div class='panel-heading'>
         <div class='username'><a href='#' class='username'>${message.username}</a></div>
@@ -36,13 +36,23 @@ app.renderMessage = function(message) {
         <span class='text'>${message.text}</span>
       </div>
     </div>`);
-  $('#chats').append(newMessage);
+  $(`.${roomname}`).append(newMessage);
   window.init();
 };
 
-app.renderRoom = function(roomName) {
-  let newRoom = $('<div></div>');
-  $('#roomSelect').append(newRoom);
+app.renderRoom = function(event) {
+  // debugger;
+  app.clearMessages();
+  let newRoom = $(`<div class='chatroom ${event.target.id}'></div>`);
+  $('#chats').append(newRoom);
+  for (let i = 0; i < currentResults.results.length; i++) {
+    let currentRoom = currentResults.results[i].roomname;
+    if (currentRoom === event.target.id) {
+      console.log('stuff is happening here');
+      app.renderMessage(currentResults.results[i], event.target.id);
+    }
+  }
+  console.log('rendered room with name: ', event.target.id);
 };
 
 app.handleUsernameClick = function(event) {
@@ -55,9 +65,27 @@ app.handleSubmit = function(event) {
 };
 
 app.processResults = function(data) {
+  // Update the current response
   currentResults = data;
+  // Clear Previous Data
   app.clearMessages();
+
+
+
+  console.log(data);
+  // Populate Channel Dropdown
   for (let i = 0; i < data.results.length; i++) {
-    app.renderMessage(data.results[i]);
+    if (data.results[i].roomname) {
+      let $dropDownItem = $('<li></li>');
+      $dropDownItem.appendTo($('.dropdown-menu'));
+      let $channelName = $('<a href="#"></a>');
+      $channelName.appendTo($dropDownItem);
+      // app.renderMessage(data.results[i]);
+      $channelName.text(data.results[i].roomname);
+      $channelName.attr('id', data.results[i].roomname);
+      $($dropDownItem).append($channelName);
+    }
   }
 };
+
+app.fetch();

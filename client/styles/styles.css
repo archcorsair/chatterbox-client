@@ -101,3 +101,9 @@ form input[type=text] {
   float: right;
   padding: 5px;
 }
+
+.dropdown-menu {
+  height: auto;
+  max-height: 500px;
+  overflow-x: hidden;
+}
