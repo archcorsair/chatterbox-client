@@ -92,3 +92,12 @@ form input[type=text] {
   float: right;
   margin-top: 5px;
 }
+
+.clear-btn {
+  margin-top: 5px;
+}
+
+.dropdown {
+  float: right;
+  padding: 5px;
+}

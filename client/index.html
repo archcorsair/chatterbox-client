@@ -24,6 +24,7 @@
     </script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
+    <script src="scripts/init.js"></script>
     <script src="scripts/app.js"></script>
   </head>
   <body>
@@ -31,8 +32,21 @@
       <h1>Chatterbox</h1>
       <!-- Your HTML goes here! -->
       <div id='send'>
-        <input type="text" class="form-control" placeholder="Type Your Message Here">
+        <input type="text" class="text-field form-control" placeholder="Type Your Message Here">
         <input class='submit btn btn-default' type='submit' value='Submit'>
+
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            Channels
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <!-- Channels will appear here. Example Channel:
+            <li><a href="#">Channel 1</a></li>
+            -->
+          </ul>
+        </div>
+        <button class='clear-btn btn btn-danger' type='button'>Nuke Chat</button>
       </div>
     </div>
     <div id="chats">
