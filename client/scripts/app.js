@@ -18,7 +18,8 @@ app.fetch = function() {
   $.ajax({
     type: 'GET',
     url: API_URL,
-    success: app.processResults
+    success: app.processResults,
+    error: function() { throw new Error('Error Fetching Data From Server'); }
   });
 };
 
@@ -70,20 +71,25 @@ app.processResults = function(data) {
   // Clear Previous Data
   app.clearMessages();
 
-
-
-  console.log(data);
+  console.log('Data Recieved:\n', data);
   // Populate Channel Dropdown
+  let channelList = {};
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].roomname) {
-      let $dropDownItem = $('<li></li>');
-      $dropDownItem.appendTo($('.dropdown-menu'));
-      let $channelName = $('<a href="#"></a>');
-      $channelName.appendTo($dropDownItem);
-      // app.renderMessage(data.results[i]);
-      $channelName.text(data.results[i].roomname);
-      $channelName.attr('id', data.results[i].roomname);
-      $($dropDownItem).append($channelName);
+      if (!channelList.hasOwnProperty(data.results[i].roomname)) {
+        channelList[data.results[i].roomname] = 1;
+        let $dropDownItem = $('<li></li>');
+        $dropDownItem.appendTo($('.dropdown-menu'));
+        let $channelName = $('<a href="#"></a>');
+        $channelName.appendTo($dropDownItem);
+        // app.renderMessage(data.results[i]);
+        $channelName.text(data.results[i].roomname);
+        $channelName.attr('id', data.results[i].roomname);
+        $($dropDownItem).append($channelName);
+      } else {
+        console.log('channel already created, skipping!');
+      }
+
     }
   }
 };
