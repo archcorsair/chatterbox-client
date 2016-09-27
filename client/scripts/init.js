@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('#send .clear-btn').off('click', app.clearMessages);
     $('.dropdown-menu').off('click', app.renderRoom);
     // Add new handlers
-    $('#chats .username').on('click', app.handleUsernameClick);
+    $('#chats .user-name').on('click', app.handleUsernameClick);
     $('#send .submit').on('click', app.handleSubmit);
     $('#send .clear-btn').on('click', app.clearMessages);
     $('.dropdown-menu').on('click', app.renderRoom);

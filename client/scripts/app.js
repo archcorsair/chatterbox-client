@@ -33,7 +33,7 @@ app.clearMessages = function() {
 app.renderMessage = function(message, roomname = '#chats') {
   let newMessage = $(`<div class='message panel panel-default'>
       <div class='panel-heading'>
-        <div class='username'><a href='#' class='username'>${message.username}</a></div>
+        <div class='user-name'><a href='#' class='user-name ${message.username}'>${message.username}</a></div>
       </div>
       <div class='panel-body'>
         <span class='text'>${message.text}</span>
@@ -59,7 +59,9 @@ app.renderRoom = function(event) {
 };
 
 app.handleUsernameClick = function(event) {
-  console.log(event);
+  event.preventDefault();
+  let userID = event.target.classList[1];
+  $(`.${userID}`).css('font-weight', 'bold');
 };
 
 app.handleSubmit = function(event) {
