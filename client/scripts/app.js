@@ -19,6 +19,7 @@ app.fetch = function() {
   $.ajax({
     type: 'GET',
     url: API_URL,
+    data: {order: '-createdAt'},
     success: app.processResults,
     error: function() { throw new Error('Error Fetching Data From Server'); }
   });
