@@ -103,7 +103,6 @@ class App {
       return alert('Please join a room before submitting!');
     }
     if (!this.textField.val()) { // Make sure user input not blank
-      debugger;
       return alert('Please type a message before submitting!');
     }
     let newSubmit = {};
