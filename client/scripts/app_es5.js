@@ -10,7 +10,7 @@ app.send = function(message) {
     url: API_URL,
     success: function() { console.log('message sent'); },
     data: message,
-    dataType: JSON
+    error: function(e) { console.error(e); }
   });
 };
 
@@ -21,7 +21,7 @@ app.fetch = function() {
     url: API_URL,
     data: {order: '-createdAt'},
     success: app.processResults,
-    error: function() { throw new Error('Error Fetching Data From Server'); }
+    error: function(e) { console.error(e); }
   });
 };
 
@@ -49,7 +49,7 @@ app.renderRoom = function(event) {
   app.updateRoomName(currentRoom);
   app.clearMessages();
   let newRoom = $(`<div class='chatroom ${event.target.id}'></div>`);
-  $('#chats').append(newRoom);
+  $('#chats').prepend(newRoom);
   for (let i = 0; i < currentResults.results.length; i++) {
     let room = currentResults.results[i].roomname;
     if (room === event.target.id) {
